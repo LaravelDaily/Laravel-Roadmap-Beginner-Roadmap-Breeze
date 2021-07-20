@@ -1,6 +1,12 @@
 <?php
 
+use App\Models\Post;
+use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +20,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    // if you don’t put with() here, you will have N+1 query performance problem
+    $posts = Post::with('category', 'tag')->take(5)->latest()->get();
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return view('home', compact('posts'));
+});
+Route::view('about', 'about')->name('about');
+
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/', DashboardController::class)->name('dashboard');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('tags', TagController::class);
+    Route::resource('posts', PostController::class);
+});
 
 require __DIR__.'/auth.php';
