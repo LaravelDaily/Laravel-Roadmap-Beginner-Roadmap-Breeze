@@ -1,6 +1,6 @@
 <aside class="relative hidden w-64 h-screen shadow-xl bg-sidebar sm:block">
     <div class="p-6">
-        <a href="index.html" class="text-3xl font-semibold text-white uppercase hover:text-gray-300">Admin</a>
+        <a href="{{ route('admin.dashboard') }}" class="text-3xl font-semibold text-white uppercase hover:text-gray-300">Admin</a>
         <a href="{{ route('admin.posts.create') }}" class="flex items-center justify-center w-full py-2 mt-5 font-semibold bg-white rounded-tr-lg rounded-bl-lg rounded-br-lg shadow-lg cta-btn hover:shadow-xl hover:bg-gray-300">
             <i class="mr-3 fas fa-plus"></i> New Post
         </a>

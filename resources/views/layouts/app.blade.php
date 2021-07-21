@@ -36,25 +36,21 @@
                 
                 <div class="flex items-center text-base leading-5">
                     <div class="hidden sm:block">
-                        <a class="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100" href="#">Blog</a>
-                        <a class="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100" href="#">Tags</a>
-                        <a class="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100" href="{{ route('about') }}">About</a>
+                        <a class="p-1 font-medium text-gray-900 sm:p-4" href="{{ route('post.index') }}">Blog</a>
+                        <a class="p-1 font-medium text-gray-900 sm:p-4" href="{{ route('about') }}">About</a>
+                        @auth
+                          <a class="p-1 font-medium text-indigo-700 uppercase bg-indigo-200 hover:text-white hover:bg-indigo-700 sm:p-4" href="{{ route('admin.dashboard') }}">Admin</a>
+                        @endauth
                     </div>
                     <div class="sm:hidden">
                         <div class="fixed right-0 z-10 w-full h-full duration-300 ease-in-out transform translate-x-full bg-gray-200 top-24 dark:bg-gray-800 opacity-95">
                             <button type="button" aria-label="toggle modal" class="fixed w-full h-full cursor-auto focus:outline-none"></button>
                             <nav class="fixed h-full mt-8">
                                 <div class="px-12 py-4">
-                                    <a class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100" href="/blog">Blog</a>
+                                    <a class="text-2xl font-bold tracking-widest text-gray-900" href="/blog">Blog</a>
                                 </div>
                                 <div class="px-12 py-4">
-                                    <a class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100" href="/tags">Tags</a>
-                                </div>
-                                <div class="px-12 py-4">
-                                    <a class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100" href="/projects">Projects</a>
-                                </div>
-                                <div class="px-12 py-4">
-                                    <a class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100" href="/about">About</a>
+                                    <a class="text-2xl font-bold tracking-widest text-gray-900" href="{{ route('about') }}">About</a>
                                 </div>
                             </nav>
                         </div>

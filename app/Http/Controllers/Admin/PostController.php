@@ -31,7 +31,8 @@ class PostController extends Controller
         $tags = explode(',', $request->tags);
 
         if ($request->has('image')) {
-            $filename = $request->file('image')->store('public/uploads');
+            $filename = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('uploads', $filename, 'public');
         }
         
         $post = auth()->user()->posts()->create([

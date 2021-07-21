@@ -3,10 +3,11 @@
 use App\Models\Post;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\TagController;
-use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TagController as AdminTagController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +24,18 @@ Route::get('/', function () {
     // if you don’t put with() here, you will have N+1 query performance problem
     $posts = Post::with('category', 'tag')->take(5)->latest()->get();
 
-    return view('home', compact('posts'));
+    return view('pages.home', compact('posts'));
 });
-Route::view('about', 'about')->name('about');
+
+Route::get('posts', [POstController::class, 'index'])->name('post.index');
+Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
+Route::view('about', 'pages.about')->name('about');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', DashboardController::class)->name('dashboard');
-    Route::resource('categories', CategoryController::class);
-    Route::resource('tags', TagController::class);
-    Route::resource('posts', PostController::class);
+    Route::resource('categories', AdminCategoryController::class);
+    Route::resource('tags', AdminTagController::class);
+    Route::resource('posts', AdminPostController::class);
 });
 
 require __DIR__.'/auth.php';
