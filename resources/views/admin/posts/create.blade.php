@@ -22,7 +22,7 @@
             </div>
             <div class="mb-4">
                 <label class="block text-sm text-gray-600" for="tags">Tags</label>
-                <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded @error('tags') border-red-600 @enderror" id="tags" name="tags" type="text" placeholder="Write tags">
+                <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded @error('tags') border-red-600 @enderror" id="tags" name="tags" type="text" value="{{ old('tags') }}" placeholder="Write tags">
                 <span class="text-xs text-gray-400">Separated by comma</span>
                 @error('tags')
                     <span class="font-medium text-red-600" role="alert">{{ $message }}</span>

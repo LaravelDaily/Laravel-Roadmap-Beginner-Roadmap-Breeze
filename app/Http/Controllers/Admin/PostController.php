@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\EditPostRequest;
 use App\Http\Requests\Admin\CreatePostRequest;
 
 class PostController extends Controller
@@ -50,48 +52,49 @@ class PostController extends Controller
         return redirect()->route('admin.posts.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function edit(Post $post)
     {
-        //
+        $categories = Category::all();
+        $tags = $post->tag->implode('name', ', ');
+
+        return view('admin.posts.edit', compact('post', 'tags', 'categories'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(EditPostRequest $request, Post $post)
     {
-        //
+        $tags = explode(',', $request->tags);
+
+        if ($request->has('image')) {
+            Storage::delete('public/uploads/' . $post->image);
+            
+            $filename = time() . '_' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('uploads', $filename, 'public');
+        }
+
+        $post->update([
+            'title' => $request->title,
+            'image' => $filename ?? $post->image,
+            'post' => $request->post,
+            'category_id' => $request->category
+        ]);
+
+        foreach ($tags as $tagName) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $post->tag()->sync($tag);
+        }
+
+        return redirect()->route('admin.posts.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(Post $post)
     {
-        //
-    }
+        if ($post->image) {
+            Storage::delete('public/uploads/' . $post->image);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $post->tag()->detach();
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 }
