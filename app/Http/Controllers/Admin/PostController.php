@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->simplePaginate(20);
+        $posts = Post::with('category')->paginate(20);
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -37,7 +37,7 @@ class PostController extends Controller
         
         $post = auth()->user()->posts()->create([
             'title' => $request->title,
-            'image' => $filename,
+            'image' => $filename ?? null,
             'post' => $request->post,
             'category_id' => $request->category
         ]);

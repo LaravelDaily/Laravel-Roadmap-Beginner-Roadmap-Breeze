@@ -36,7 +36,7 @@
                 
                 <div class="flex items-center text-base leading-5">
                     <div class="hidden sm:block">
-                        <a class="p-1 font-medium text-gray-900 sm:p-4" href="{{ route('post.index') }}">Blog</a>
+                        <a class="p-1 font-medium text-gray-900 sm:p-4" href="{{ route('posts.index') }}">Blog</a>
                         <a class="p-1 font-medium text-gray-900 sm:p-4" href="{{ route('about') }}">About</a>
                         @auth
                           <a class="p-1 font-medium text-indigo-700 uppercase bg-indigo-200 hover:text-white hover:bg-indigo-700 sm:p-4" href="{{ route('admin.dashboard') }}">Admin</a>
