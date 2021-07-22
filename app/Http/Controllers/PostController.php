@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('tag', 'category')->latest()->paginate(10);
+        $posts = Post::with('tags', 'category')->latest()->paginate(10);
 
         return view('posts.index', compact('posts'));
     }

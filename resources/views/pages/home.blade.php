@@ -24,7 +24,7 @@
                         <div>
                             <h2 class="text-2xl font-medium tracking-tight text-gray-900 title-font">{{ $post->title }}</h2>
                             <div class="flex flex-wrap">
-                                @foreach ($post->tag as $tag)
+                                @foreach ($post->tags as $tag)
                                     <span class="mr-3 text-sm font-medium text-green-400 uppercase hover:text-green-600">{{ $tag->name }}</span>
                                 @endforeach
                             </div>

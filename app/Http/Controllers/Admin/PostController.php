@@ -46,7 +46,7 @@ class PostController extends Controller
 
         foreach ($tags as $tagName) {
             $tag = Tag::firstOrCreate(['name' => $tagName]);
-            $post->tag()->attach($tag);
+            $post->tags()->attach($tag);
         }
 
         return redirect()->route('admin.posts.index');
@@ -55,7 +55,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        $tags = $post->tag->implode('name', ', ');
+        $tags = $post->tags->implode('name', ', ');
 
         return view('admin.posts.edit', compact('post', 'tags', 'categories'));
     }
@@ -78,10 +78,12 @@ class PostController extends Controller
             'category_id' => $request->category
         ]);
 
+        $newTags = [];
         foreach ($tags as $tagName) {
             $tag = Tag::firstOrCreate(['name' => $tagName]);
-            $post->tag()->sync($tag);
+            array_push($newTags, $tag->id);
         }
+        $post->tags()->sync($newTags);
 
         return redirect()->route('admin.posts.index');
     }

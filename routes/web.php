@@ -22,7 +22,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 
 Route::get('/', function () {
     // if you don’t put with() here, you will have N+1 query performance problem
-    $posts = Post::with('category', 'tag')->take(5)->latest()->get();
+    $posts = Post::with('category', 'tags')->take(5)->latest()->get();
 
     return view('pages.home', compact('posts'));
 });
@@ -32,7 +32,7 @@ Route::get('post/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::view('about', 'pages.about')->name('about');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('/', DashboardController::class)->middleware('auth')->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', AdminCategoryController::class);
     Route::resource('tags', AdminTagController::class);
     Route::resource('posts', AdminPostController::class);
