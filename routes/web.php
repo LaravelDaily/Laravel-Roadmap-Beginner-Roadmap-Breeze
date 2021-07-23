@@ -25,7 +25,7 @@ Route::get('/', function () {
     $posts = Post::with('category', 'tags')->take(5)->latest()->get();
 
     return view('pages.home', compact('posts'));
-});
+})->name('home');
 
 Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('post/{id}', [PostController::class, 'show'])->name('posts.show');

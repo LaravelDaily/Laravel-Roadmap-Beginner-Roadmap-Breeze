@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::with('tags')->findOrFail($id);
         
         return view('posts.show', compact('post'));
     }
