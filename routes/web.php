@@ -32,7 +32,6 @@ Route::get('post/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::view('about', 'pages.about')->name('about');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', AdminCategoryController::class);
     Route::resource('tags', AdminTagController::class);
     Route::resource('posts', AdminPostController::class);
