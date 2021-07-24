@@ -9,11 +9,9 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form method="POST" action="{{ route('admin.categories.store') }}">
                         @csrf
-                        <div class="">
-                            <label class="block text-sm text-gray-600" for="name">Name</label>
-                            <input
-                                class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded @error('name') border-red-600 @enderror"
-                                id="name" name="name" type="text" required placeholder="Category name">
+                        <div>
+                            <x-label class="block text-sm text-gray-600" for="name"/>Name
+                            <x-input id="name" class="block w-full mt-1" name="name" type="text" required/>
                             @error('name')
                             <span class="font-medium text-red-600" role="alert">{{ $message }}</span>
                             @enderror

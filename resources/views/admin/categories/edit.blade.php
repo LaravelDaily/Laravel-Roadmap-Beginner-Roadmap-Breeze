@@ -10,12 +10,9 @@
                     <form method="POST" action="{{ route('admin.categories.update', $category->id) }}">
                         @method('PUT')
                         @csrf
-                        <div class="">
-                            <label class="block text-sm text-gray-600" for="name">Name</label>
-                            <input
-                                class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded @error('name') border-red-600 @enderror"
-                                id="name" name="name" type="text" required value="{{ $category->name }}"
-                                placeholder="Category name">
+                        <div>
+                            <x-label class="block text-sm text-gray-600" for="name"/>Name
+                            <x-input id="name" class="block w-full mt-1" name="name" type="text" value="{{ $category->name }}" required/>
                             @error('name')
                             <span class="font-medium text-red-600" role="alert">{{ $message }}</span>
                             @enderror

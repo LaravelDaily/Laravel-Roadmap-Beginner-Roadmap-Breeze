@@ -20,7 +20,7 @@
                             <div>
                                 @foreach ($post->tags as $tag)
                                     <span
-                                        class="mr-3 text-sm font-medium text-green-400 uppercase hover:text-green-600">{{ $tag->name }}</span>
+                                        class="mr-3 text-sm font-medium uppercase">#{{ $tag->name }}</span>
                                 @endforeach
                             </div>
                         </dl>

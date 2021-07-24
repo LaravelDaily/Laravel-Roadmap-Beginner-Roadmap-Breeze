@@ -7,8 +7,8 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="flex mb-4">
-                        <x-admin.create-button :href="route('admin.tags.create')"/>
+                    <div class="mb-4">
+                        <x-nav-link :href="route('admin.tags.create')">Create</x-nav-link>
                     </div>
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -28,18 +28,15 @@
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $tag->id }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $tag->name }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">
-                                    <a class="px-4 py-2 text-white font-light mr-3 tracking-wider bg-[#3d68ff] hover:bg-[#1947ee] rounded"
-                                       href="{{ route('admin.tags.edit', $tag->id) }}">
+                                <x-nav-link href="{{ route('admin.tags.edit', $tag->id) }}">
                                         Edit
-                                    </a>
+                                </x-nav-link>
 
                                     <form action="{{ route('admin.tags.destroy', $tag->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit"
-                                               class="px-4 py-2 font-light tracking-wider text-white bg-red-600 rounded hover:bg-red-800"
-                                               value="Delete">
+                                        <x-button>Delete</x-button>
                                     </form>
                                 </td>
                             </tr>

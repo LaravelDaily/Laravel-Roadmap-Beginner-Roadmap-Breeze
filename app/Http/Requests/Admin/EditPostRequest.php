@@ -27,7 +27,7 @@ class EditPostRequest extends FormRequest
             'title'     => 'required',
             'image'     => 'nullable|image|dimensions:max_width=100,max_height=200',
             'post'      => 'required',
-            'category'  => 'integer',
+            'category'  => 'required|integer|exists:categories,id',
             'tags'      => 'required'
         ];
     }
