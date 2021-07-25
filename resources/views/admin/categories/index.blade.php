@@ -10,7 +10,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     <div class="mb-4">
-                        <x-nav-link :href="route('admin.categories.create')">Create</x-nav-link>
+                        <x-link :href="route('admin.categories.create')">Create</x-link>
                     </div>
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -30,9 +30,9 @@
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $category->id }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $category->name }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">
-                                    <x-nav-link :href="route('admin.categories.edit', $category->id)">
+                                    <x-link :href="route('admin.categories.edit', $category->id)">
                                         Edit
-                                    </x-nav-link>
+                                    </x-link>
 
                                     <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure?');" style="display: inline-block;">

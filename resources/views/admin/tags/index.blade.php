@@ -8,7 +8,7 @@
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="mb-4">
-                        <x-nav-link :href="route('admin.tags.create')">Create</x-nav-link>
+                        <x-link :href="route('admin.tags.create')">Create</x-link>
                     </div>
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -28,9 +28,9 @@
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $tag->id }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">{{ $tag->name }}</td>
                                 <td class="px-6 py-4 border-b border-gray-200">
-                                <x-nav-link href="{{ route('admin.tags.edit', $tag->id) }}">
+                                <x-link href="{{ route('admin.tags.edit', $tag->id) }}">
                                         Edit
-                                </x-nav-link>
+                                </x-link>
 
                                     <form action="{{ route('admin.tags.destroy', $tag->id) }}" method="POST"
                                           onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
